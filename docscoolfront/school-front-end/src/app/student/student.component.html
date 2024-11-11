@@ -1,0 +1,62 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Students
+      </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- First Name Column -->
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef> First Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef> Last Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+
+        <!-- Code Column -->
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef> Code </th>
+          <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+        </ng-container>
+
+        <!-- Program ID Column -->
+        <ng-container matColumnDef="programId">
+          <th mat-header-cell *matHeaderCellDef> Program ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.programId}} </td>
+        </ng-container>
+
+        <!-- Delete Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon
+                    style="color: red; font-size: 25px; cursor: pointer;"
+                    (click)="deleteStudent(element.id)">
+              delete
+            </mat-icon>
+          </td>
+        </ng-container>
+
+        <!-- Header and Row Definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+      <mat-paginator [pageSizeOptions]="[1, 2, 5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

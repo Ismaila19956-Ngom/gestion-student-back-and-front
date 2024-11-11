@@ -1,0 +1,77 @@
+<mat-toolbar color="primary">
+  <button (click)="myDrawer.toggle()" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span style="flex: auto"></span>
+  <div>
+    <input
+            matInput
+            placeholder="Rechercher..."
+            [(ngModel)]="searchQuery"
+            class="search-input"
+    />
+    <button mat-button (click)="searchStudent()">Rechercher</button>
+
+  </div>
+
+  <button routerLink="/admin/home" mat-button>Home</button>
+  <button routerLink="/admin/profile" mat-button>Profile</button>
+
+  <button mat-button [matMenuTriggerFor]="importMenu">
+    <mat-icon>keyboard-arrow-down</mat-icon>
+    Import
+  </button>
+  <mat-menu #importMenu>
+    <button routerLink="student" mat-menu-item>Students</button>
+    <button routerLink="payment" mat-menu-item>Payments</button>
+  </mat-menu>
+  <button mat-button mat-raised-button class="neutral-button" color="neutral-button" routerLink="login">
+    Login
+  </button>
+
+  <button mat-button mat-raised-button color="accent" routerLink="login">
+    Logout
+  </button>
+</mat-toolbar>
+
+<mat-drawer-container>
+  <mat-drawer #myDrawer opened="true" mode="side" position="start">
+    <mat-list>
+      <mat-list-item>
+        <mat-icon>dashboard</mat-icon>
+        <button routerLink="/admin/dashboard" mat-button>Dashboard</button>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon>supervisor_account</mat-icon>
+        <button routerLink="newStudent" mat-button>Add Student</button>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon>payment</mat-icon>
+        <button routerLink="newPayment" mat-button>Add Payments</button>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon>library_books</mat-icon>
+        <button routerLink="/admin/file-of-study" mat-button>Field of Study</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div style="min-height: 600px; padding: 16px;">
+      <router-outlet></router-outlet>
+
+      <div *ngIf="student" class="info-student">
+        <h3  style="color: #3f51b5">Détails de l'étudiant :</h3>
+          <p><strong> ID:</strong> {{ student.id }}</p>
+        <p><strong>Nom :</strong> {{ student.firstName }}</p>
+        <p><strong>Prénom:</strong> {{ student.lastName }}</p>
+        <p><strong>Code:</strong> {{ student.code }}</p>
+        <p><strong>ID du programme:</strong> {{ student.programId }}</p>
+      </div>
+
+      <div *ngIf="errorMessage" style="color: red;">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
